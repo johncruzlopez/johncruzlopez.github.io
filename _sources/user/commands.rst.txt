@@ -119,7 +119,7 @@ Ejemplo:
 
     Sofia, tómame una foto
 
-.. image:: /user/img/YouTubeCommand.png
+.. image:: /user/img/PictureCommand.png
 
 
 .. _HelpCommand:
