@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desarrollo del asistente virtual &mdash; documentación de AsistenteVirtual - </title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Requerimientos para el Asistente Virtual" href="requirements.html" />
+    <link rel="prev" title="Introducción al Asistente Virtual" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> AsistenteVirtual
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentación de usuario:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/commands.html">Commandos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentación técnica:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introducción al Asistente Virtual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Desarrollo del asistente virtual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#clase-principal-virtual-assistant-py">Clase principal (virtual_assistant.py)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-init">Método __init__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-runassistant">Método runAssistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-listenforcommand">Método listenForCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-executecommand">Método executeCommand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-sendresponse">Método sendResponse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-getaudio">Método getAudio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-shutdown">Método shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-help">Método help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metodo-parametrize">Método parametrize</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#clases-de-ayuda-virtual-assistant-utils-py">Clases de Ayuda (virtual_assistant_utils.py)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#clase-youtubehelper">Clase _YoutubeHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clase-timehelper">Clase TimeHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clase-wikipediahelper">Clase WikipediaHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clase-googlehelper">Clase GoogleHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clase-mailhelper">Clase MailHelper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clase-picturehelper">Clase PictureHelper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requerimientos para el Asistente Virtual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Instalación del Asistente Virtual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuración del Asistente Virtual</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AsistenteVirtual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Desarrollo del asistente virtual</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/technical/development.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="desarrollo-del-asistente-virtual">
+<h1>Desarrollo del asistente virtual<a class="headerlink" href="#desarrollo-del-asistente-virtual" title="Enlace permanente a este encabezado"></a></h1>
+<p>Como se ha comentado en otras partes, el asistente virtual está hecho con lenguaje de programación Python.
+Está dividido en dos archivos:
+* Archivo principal: En donde se encuentra la función de entrada de ejecución “main” y la clase VirtualAssistant, que tiene la lógica del asistente virtual
+* Archivo de utilidades: En donde se encuentran las clases auxiliares que ejecutan cada uno de los comandos.</p>
+<section id="clase-principal-virtual-assistant-py">
+<span id="mainclass"></span><h2>Clase principal (virtual_assistant.py)<a class="headerlink" href="#clase-principal-virtual-assistant-py" title="Enlace permanente a este encabezado"></a></h2>
+<p>Esta clase contiene la lógica de la aplicación y está subdividida en varios métodos.</p>
+<p>Tiene propiedades modificables como <code class="docutils literal notranslate"><span class="pre">name</span></code> para almacenar el nombre del asistente y <code class="docutils literal notranslate"><span class="pre">languaje</span></code> para definir el lenguaje natural del aistente.
+Otras propiedades definidas son de uso interno y no se deben modificar.</p>
+<p>A continuación se explica en detalle cada uno de los métodos utilizados:</p>
+<section id="metodo-init">
+<span id="initmethod"></span><h3>Método __init__<a class="headerlink" href="#metodo-init" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método inicializa las propiedades de la clase que requieren ser inicializadas, ajusta parámetros de audio con <a class="reference internal" href="#parametrizemethod"><span class="std std-ref">parametrize</span></a> y llama al método <a class="reference internal" href="#runassistantmethod"><span class="std std-ref">runAssistant</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">running</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="n">running</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">runAssitant</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-runassistant">
+<span id="runassistantmethod"></span><h3>Método runAssistant<a class="headerlink" href="#metodo-runassistant" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método ejecuta el algoritmo que corre permanentemente la aplicación en un loop infinito que se rompera tan pronto se dé el comando de <a class="reference internal" href="../user/commands.html#shutdowncommand"><span class="std std-ref">apagar</span></a>.
+Dentro del loop, usa consecutivamente los métodos <a class="reference internal" href="#listenforcommandmethod"><span class="std std-ref">listenForCommand</span></a>, <a class="reference internal" href="#executecommandmethod"><span class="std std-ref">executeCommand</span></a> y <a class="reference internal" href="#sendresponsemethod"><span class="std std-ref">sendResponse</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">runAssitant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">parametrize</span><span class="p">()</span>
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+        <span class="n">helper</span><span class="p">,</span> <span class="n">command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listenForCommand</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">executeCommand</span><span class="p">(</span><span class="n">helper</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendResponse</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-listenforcommand">
+<span id="listenforcommandmethod"></span><h3>Método listenForCommand<a class="headerlink" href="#metodo-listenforcommand" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método tiene un loop infinito que permanentemente hace capturas de audio convertidas en texto, a través del método <a class="reference internal" href="#getaudiomethod"><span class="std std-ref">getAudio</span></a>, compara con el banco de instrucciones que tiene programadas y si coincide con alguna, devuelve una referencias del método que ejecuta dicha instrucción.
+En caso contrario, devuelve un mensaje de error.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">listenForCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getAudio</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;apagar&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ayuda&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">help</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">_command</span> <span class="ow">in</span> <span class="n">COMMANDS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_command</span><span class="p">[</span><span class="s2">&quot;command&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+                <span class="n">helper</span> <span class="o">=</span> <span class="n">_command</span><span class="p">[</span><span class="s2">&quot;helper&quot;</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">helper</span><span class="p">,</span> <span class="n">command</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendResponse</span><span class="p">(</span><span class="s2">&quot;No te entendí, por favor repítelo.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-executecommand">
+<span id="executecommandmethod"></span><h3>Método executeCommand<a class="headerlink" href="#metodo-executecommand" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método se encarga de ejecutar la clase utilitaria referenciada en <a class="reference internal" href="#listenforcommandmethod"><span class="std std-ref">listenForCommand</span></a>, con el comando detectado previamente en el mismo método.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">executeCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">helper</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">helper</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-sendresponse">
+<span id="sendresponsemethod"></span><h3>Método sendResponse<a class="headerlink" href="#metodo-sendresponse" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método se encarga de recibir una cadena que usa para convertirla a audio y reproducirlo a través del parlante predefinido en el sistema operativo.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Usa la librería <code class="docutils literal notranslate"><span class="pre">pyttsx3</span></code> para la converisón de texto a audio y reproducir ese audio.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sendResponse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">say</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">runAndWait</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-getaudio">
+<span id="getaudiomethod"></span><h3>Método getAudio<a class="headerlink" href="#metodo-getaudio" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método abre el micrófono para obtener audio que pueda detectar como instrucciones, las convierte a texto y verifica si la instrucción comienza por el nombre del asistente.
+De no ser así, entiende que no es una instrucción que se impartió, por lo tanto desecha el audio y devuelve <code class="docutils literal notranslate"><span class="pre">None</span></code>.
+Si encuentra algún error en medio del reconocimiento, muestra el error y devuelve <code class="docutils literal notranslate"><span class="pre">None</span></code>, para que el programa sigua su curso normal.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Usa la librería <code class="docutils literal notranslate"><span class="pre">speech_recognition</span></code> para la detección de audio y conversión de ese audio a texto.
+Para esto último se predifinió el uso de Google <em>Speech Recognition API</em>, usando los servicios en línea de reconociimento de voz de Google.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getAudio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sr</span><span class="o">.</span><span class="n">Microphone</span><span class="p">()</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Esperando comandos...&quot;</span><span class="p">)</span>
+        <span class="n">audio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reconociendo audio...&quot;</span><span class="p">)</span>
+        <span class="n">audio_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">recognize_google</span><span class="p">(</span>
+            <span class="n">audio</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OK Reconocí esto: &quot;</span> <span class="o">+</span> <span class="n">audio_string</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">sr</span><span class="o">.</span><span class="n">UnknownValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># self.sendResponse(&quot;No entendí lo que dijiste.&quot;)</span>
+        <span class="c1"># self.sendResponse(&quot;Podrías por favor repetir?&quot;)</span>
+    <span class="k">except</span> <span class="n">sr</span><span class="o">.</span><span class="n">RequestError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;No pude procesar tu solicitud </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">audio_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+        <span class="k">return</span> <span class="n">audio_string</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">):]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-shutdown">
+<span id="shutdownmethod"></span><h3>Método shutdown<a class="headerlink" href="#metodo-shutdown" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método termina la aplicación, poniendo la variable interna <code class="docutils literal notranslate"><span class="pre">running</span></code> en estado <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendResponse</span><span class="p">(</span><span class="s2">&quot;Hasta pronto!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-help">
+<span id="helpmethod"></span><h3>Método help<a class="headerlink" href="#metodo-help" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método simplemente arma una frase con los comandos que tiene programados y los dice haciendo uso del método <a class="reference internal" href="#sendresponsemethod"><span class="std std-ref">sendResponse</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">help</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">commands</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;command&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">COMMANDS</span><span class="p">]</span>
+    <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Apagar&quot;</span><span class="p">)</span>
+    <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Ayuda&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendResponse</span><span class="p">(</span>
+        <span class="s2">&quot;Estos son los comandos que tengo programados: &quot;</span> <span class="o">+</span>
+        <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span> <span class="o">+</span>
+        <span class="s2">&quot;... Todos los comandos deben comenzar por mi nombre, &quot;</span> <span class="o">+</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-parametrize">
+<span id="parametrizemethod"></span><h3>Método parametrize<a class="headerlink" href="#metodo-parametrize" title="Enlace permanente a este encabezado"></a></h3>
+<p>Este método ajusta algunas propiedades iniciales, así:</p>
+<p>Busca la segunda voz en español que tiene el sistema instalado y la selecciona para ser usada a la largo del programa.
+La segunda voz es la voz de mujer de la versión en español.
+Si no encuentra una voz en español, entonces trata de usar la segunda voz instalada en el sistema, que es la voz de mujer del lenguaje instlado.
+Si no la encuentra, usa la primera voz encontrada, se de hombre o de mujer.</p>
+<p>Ajusta niveles de toma de audio tales como ruido ambiente, umbrales de los registros de voz, entre otros.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parametrize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">voices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">getProperty</span><span class="p">(</span><span class="s1">&#39;voices&#39;</span><span class="p">)</span>
+    <span class="n">selected_voice</span> <span class="o">=</span> <span class="n">voices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">voices</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">voices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">voice</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Spanish&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">selected_voice</span> <span class="o">=</span> <span class="n">voice</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">voices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">selected_voice</span> <span class="o">=</span> <span class="n">voices</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s1">&#39;voice&#39;</span><span class="p">,</span> <span class="n">selected_voice</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendResponse</span><span class="p">(</span>
+        <span class="s2">&quot;Ajustando parámetros de audio.&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">energy_threshold</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">dynamic_energy_threshold</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">with</span> <span class="n">sr</span><span class="o">.</span><span class="n">Microphone</span><span class="p">()</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">adjust_for_ambient_noise</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendResponse</span><span class="p">(</span><span class="s2">&quot;OK. Dí &quot;</span> <span class="o">+</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; ayuda, para información de uso... Esperando comandos.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sendResponse</span><span class="p">(</span>
+        <span class="s2">&quot;No pude configurar ningún micrófono. Por favor asegúrate de tener uno conectado.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="clases-de-ayuda-virtual-assistant-utils-py">
+<span id="helperclasses"></span><h2>Clases de Ayuda (virtual_assistant_utils.py)<a class="headerlink" href="#clases-de-ayuda-virtual-assistant-utils-py" title="Enlace permanente a este encabezado"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Todas las clases de ayuda “<em>helpers</em>” usan la librería <code class="docutils literal notranslate"><span class="pre">parse</span></code>, la cual ayuda en la separación del comando y los parámetros a ejecutar para cada comando.</p>
+</div>
+<section id="clase-youtubehelper">
+<span id="youtubehelperclass"></span><h3>Clase _YoutubeHelper<a class="headerlink" href="#clase-youtubehelper" title="Enlace permanente a este encabezado"></a></h3>
+<p>Esta clase detecta las palabras que se han dicho como parámetros del comando y abre una página de YouTube con la búsqueda usando dichos parámtros y usando el navegador predefinido en el sistema operativo.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">YoutubeHelper</span><span class="p">:</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="s2">&quot;Pon en YouTube </span><span class="si">{}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">parsed_command</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parsed_command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">search_url</span> <span class="o">=</span> <span class="s2">&quot;https://www.youtube.com/results?search_query=&quot;</span> <span class="o">+</span> \
+            <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parsed_command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">search_url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">autoraise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;Poniendo en YouTube &quot;</span> <span class="o">+</span> <span class="n">parsed_command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="clase-timehelper">
+<span id="timehelperclass"></span><h3>Clase TimeHelper<a class="headerlink" href="#clase-timehelper" title="Enlace permanente a este encabezado"></a></h3>
+<p>Esta clase simplemente arma una frase usando la hora actual del reloj interno del computador y la devuelve en una cadena (<em>string</em>).
+Se puede adecuar fácilmente para que incluya el año y el mes y devuelva la fecha completamente junto a la hora.
+Solo basta con quitar el comentario y en las dos líneas y comentar la línea inmediatamente posterior.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TimeHelper</span><span class="p">:</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="s2">&quot;Qué hora es&quot;</span>
+
+    <span class="n">months</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Enero&quot;</span><span class="p">,</span> <span class="s2">&quot;Febrero&quot;</span><span class="p">,</span> <span class="s2">&quot;Marzo&quot;</span><span class="p">,</span> <span class="s2">&quot;Abril&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Mayo&quot;</span><span class="p">,</span> <span class="s2">&quot;Junio&quot;</span><span class="p">,</span> <span class="s2">&quot;Julio&quot;</span><span class="p">,</span> <span class="s2">&quot;Agosto&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Septiembre&quot;</span><span class="p">,</span> <span class="s2">&quot;Octubre&quot;</span><span class="p">,</span> <span class="s2">&quot;Noviembre&quot;</span><span class="p">,</span> <span class="s2">&quot;Diciembre&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">second</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">second</span>
+        <span class="n">minute</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">minute</span>
+        <span class="n">hour</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">hour</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">day</span>
+        <span class="n">month</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">month</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">year</span>
+        <span class="n">ampm</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%p&quot;</span><span class="p">)</span>
+        <span class="n">hour_expression1</span> <span class="o">=</span> <span class="s2">&quot;Es la &quot;</span> <span class="k">if</span> <span class="n">hour</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;Son las &quot;</span>
+        <span class="c1"># format_string = (hour_expression1 + &quot;{} y {} {} del {} de {} de {}&quot;).format(</span>
+        <span class="c1">#     hour, minute, ampm, day, self.months[now.month-1], year)</span>
+        <span class="n">format_string</span> <span class="o">=</span> <span class="p">(</span><span class="n">hour_expression1</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> y </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">,</span> <span class="n">ampm</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">format_string</span>
+</pre></div>
+</div>
+</section>
+<section id="clase-wikipediahelper">
+<span id="wikipediahelperclass"></span><h3>Clase WikipediaHelper<a class="headerlink" href="#clase-wikipediahelper" title="Enlace permanente a este encabezado"></a></h3>
+<p>Esta clase detecta las palabras que se han dicho como parámetros del comando y abre una página de Wikipedia con la búsqueda, usando dichos parámtros y usando el navegador predefinido en el sistema operativo.
+Por defecto Wikipedia envía directamente al resultado en caso de encontrar un solo, de lo contrario muestra la página de desambiguación.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WikipediaHelper</span><span class="p">:</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="s2">&quot;Busca en Wikipedia </span><span class="si">{}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">parsed_command</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parsed_command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">search_url</span> <span class="o">=</span> <span class="s2">&quot;https://en.wikipedia.org/wiki/Special:Search?search=&quot;</span> <span class="o">+</span> \
+            <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parsed_command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">search_url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">autoraise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;Buscando en Wikipedia &quot;</span> <span class="o">+</span> <span class="n">parsed_command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="clase-googlehelper">
+<span id="googlehelperclass"></span><h3>Clase GoogleHelper<a class="headerlink" href="#clase-googlehelper" title="Enlace permanente a este encabezado"></a></h3>
+<p>Esta clase detecta las palabras que se han dicho como parámetros del comando y abre una página de Google con la búsqueda, usando dichos parámtros y usando el navegador predefinido en el sistema operativo.
+En caso de no haber mencionado ningún parámetro, solamente abre la página principal de Google, para iniciar un búsqueda.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GoogleHelper</span><span class="p">:</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="s2">&quot;Abre Google </span><span class="si">{}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">parsed_command</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.google.com/search?q=&quot;</span>
+        <span class="k">if</span> <span class="n">parsed_command</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parsed_command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+            <span class="n">message_string</span> <span class="o">=</span> <span class="s2">&quot;Buscando en Google &quot;</span> <span class="o">+</span> <span class="n">parsed_command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message_string</span> <span class="o">=</span> <span class="s2">&quot;Abriendo Google&quot;</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">autoraise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">message_string</span>
+</pre></div>
+</div>
+</section>
+<section id="clase-mailhelper">
+<span id="mailhelperclass"></span><h3>Clase MailHelper<a class="headerlink" href="#clase-mailhelper" title="Enlace permanente a este encabezado"></a></h3>
+<p>Esta clase detecta las palabras que se han dicho como parámetros y usa la aplicación que se tiene por defecto como gestor de correos para redactar un nuevo correo con el destinatario, asunto y mensaje proporcionados en el comando.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MailHelper</span><span class="p">:</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="s2">&quot;Redacta correo electrónico a </span><span class="si">{}</span><span class="s2"> con asunto </span><span class="si">{}</span><span class="s2"> y mensaje </span><span class="si">{}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">parsed_command</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">parse</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_string</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parsed_command</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">mail_address</span> <span class="o">=</span> <span class="n">parsed_command</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+            <span class="s2">&quot; arroba &quot;</span><span class="p">,</span> <span class="s2">&quot;@&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">mail_link</span> <span class="o">=</span> <span class="s2">&quot;mailto:</span><span class="si">{}</span><span class="s2">?subject=</span><span class="si">{}</span><span class="s2">&amp;body=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">mail_address</span><span class="p">,</span> <span class="n">parsed_command</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">parsed_command</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mail_link</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">autoraise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;Redactando correo.&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="clase-picturehelper">
+<span id="picturehelperclass"></span><h3>Clase PictureHelper<a class="headerlink" href="#clase-picturehelper" title="Enlace permanente a este encabezado"></a></h3>
+<p>Esta clase usa la primera webcam que se tiene conectada al sistema, trata de tomar una foto y la guarda en la carpeta del programa bajo el nombre <code class="docutils literal notranslate"><span class="pre">picture.png</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PictureHelper</span><span class="p">:</span>
+    <span class="n">format_string</span> <span class="o">=</span> <span class="s2">&quot;Tómame una foto&quot;</span>
+    <span class="n">camera_port</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="n">camera</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera_port</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">cv</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;picture.png&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;No se detectó imagen. Por favor intente de nuevo&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Foto Tomada y guardada.&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introducción al Asistente Virtual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="requirements.html" class="btn btn-neutral float-right" title="Requerimientos para el Asistente Virtual" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2022, John Cruz - @johnazo.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

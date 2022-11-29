@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instalación del Asistente Virtual &mdash; documentación de AsistenteVirtual - </title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Configuración del Asistente Virtual" href="configuration.html" />
+    <link rel="prev" title="Requerimientos para el Asistente Virtual" href="requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> AsistenteVirtual
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentación de usuario:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">Introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/commands.html">Commandos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentación técnica:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introducción al Asistente Virtual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Desarrollo del asistente virtual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requerimientos para el Asistente Virtual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instalación del Asistente Virtual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparacion-inicial">Preparación inicial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creando-el-entorno-virtual">Creando el entorno virtual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instalando-las-librerias-principales">Instalando las librerías principales</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuración del Asistente Virtual</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AsistenteVirtual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Instalación del Asistente Virtual</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/technical/installation.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="instalacion-del-asistente-virtual">
+<h1>Instalación del Asistente Virtual<a class="headerlink" href="#instalacion-del-asistente-virtual" title="Enlace permanente a este encabezado"></a></h1>
+<p>La instalación del asistente virtual es muy sencilla, una vez cumplidos los <a class="reference internal" href="requirements.html"><span class="doc">requerimientos</span></a>.
+Las instrucciones que siguen están descritas para el sistema operativo Windows, pero no difieren mucho para adaptarlas a otros sistemas operativos como Linux o MacOS.</p>
+<section id="preparacion-inicial">
+<h2>Preparación inicial<a class="headerlink" href="#preparacion-inicial" title="Enlace permanente a este encabezado"></a></h2>
+<p>Lo primero que se debe hacer es crea un directorio en la ubicación deseada en donde se quiere instalar el asistente virtual e ingresar a él.
+En este caso se creará la carpeta <code class="docutils literal notranslate"><span class="pre">VirtualAssistant</span></code> en donde se alojará todo el programa y sus dependencias.</p>
+<img alt="../_images/VA_Installation_FolderCreation.png" src="../_images/VA_Installation_FolderCreation.png" />
+<p>Enseguida, se debe descargar, en la carpeta recien creada, los dos archivos de ejecución del programa llamados <code class="docutils literal notranslate"><span class="pre">virtual_asistant_utils.py</span></code> y <code class="docutils literal notranslate"><span class="pre">virtual_asistant.py</span></code> y el archivo de dependencias llamado <code class="docutils literal notranslate"><span class="pre">requeriments.txt</span></code></p>
+<p>El directorio debe quedar de la siguiente manera:</p>
+<img alt="../_images/VA_Installation_MainFiles.png" src="../_images/VA_Installation_MainFiles.png" />
+</section>
+<section id="creando-el-entorno-virtual">
+<h2>Creando el entorno virtual<a class="headerlink" href="#creando-el-entorno-virtual" title="Enlace permanente a este encabezado"></a></h2>
+<p>Para mejorar la instalación y evitar problemas con librerías previamente instaladas en el sistema, se va a trabajar usando un entorno virtual de Python, que en resumidas cuentas, genera una caja de arena en donde se alojará las librerías que se instalará.
+Para esto se instalará y usará la librería <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install virtualenv
+virtualenv venv
+venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</pre></div>
+</div>
+<img alt="../_images/VA_Installation_Virtualenv.png" src="../_images/VA_Installation_Virtualenv.png" />
+<p>El “prompt” del sistema deberá aparecer con <em>(venv)</em> al comienzo, tal como lo muestra la imagen anterior.</p>
+</section>
+<section id="instalando-las-librerias-principales">
+<h2>Instalando las librerías principales<a class="headerlink" href="#instalando-las-librerias-principales" title="Enlace permanente a este encabezado"></a></h2>
+<p>El asistente tiene dependencia de las siguiente librerías principales, las cuales a su vez, dependen de otras.
+Las librerías principales se encargan de instalar sus dependencias de manera automática por lo que no debe preocuparnos:
+Para instalarlas se ejecuta:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<img alt="../_images/VA_Installation_Librariesinstallation.png" src="../_images/VA_Installation_Librariesinstallation.png" />
+<p>La instalación debería terminar sin errores como se muestra en la imagen arriba.</p>
+<p>Ahora puede <a class="reference internal" href="configuration.html"><span class="doc">configurar</span></a> los dispositivos ocn los que trabajará el asistente virtual, o ejecutar el asistente siguiendo los pasos descritos en el <a class="reference internal" href="../user/introduction.html"><span class="doc">manual de usuario</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="requirements.html" class="btn btn-neutral float-left" title="Requerimientos para el Asistente Virtual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuración del Asistente Virtual" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2022, John Cruz - @johnazo.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
